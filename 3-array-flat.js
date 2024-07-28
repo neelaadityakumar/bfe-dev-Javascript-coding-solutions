@@ -9,3 +9,5 @@ function flat(arr, depth = 1) {
   });
   return res;
 }
+
+//https://bigfrontend.dev/problem/implement-Array-prototype.flat

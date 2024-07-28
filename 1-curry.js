@@ -9,3 +9,5 @@ function curry(fn) {
     };
   };
 }
+
+//https://bigfrontend.dev/problem/implement-curry
