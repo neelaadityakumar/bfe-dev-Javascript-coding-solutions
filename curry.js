@@ -1,5 +1,5 @@
 function curry(fn) {
-  return function curried(...args) {
+  return function (...args) {
     // if number of arguments match
     if (args.length >= fn.length) {
       return fn(...args);
