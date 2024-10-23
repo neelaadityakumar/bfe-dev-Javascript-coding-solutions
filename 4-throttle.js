@@ -1,7 +1,3 @@
-/**
- * @param {Function} func
- * @param {number} wait
- */
 function throttle(func, wait) {
   // Track if we are waiting. Initially, we are not.
   let isWaiting = false;
@@ -38,4 +34,35 @@ function throttle(func, wait) {
     }, wait);
   };
 }
+
+let currentTime = 0;
+const run = (input) => {
+  currentTime = 0;
+  const calls = [];
+  const func = (arg) => {
+    calls.push(`${arg}@${currentTime}`);
+  };
+  const throttled = throttle(func, 3);
+  input.forEach((call) => {
+    const [arg, time] = call.split("@");
+    setTimeout(() => throttled(arg), time);
+  });
+  return calls;
+};
+console.log(run(["A@0", "B@2", "C@3"]));
+//toEqual(['A@0', 'C@3'])
 //https://bigfrontend.dev/problem/implement-basic-throttle
+
+//A more simple throttle function
+function throttle(func, interval) {
+  let isRunning = false;
+  return function (...args) {
+    if (!isRunning) {
+      isRunning = true;
+      func.apply(this, args);
+      setTimeout(() => {
+        isRunning = false;
+      }, interval);
+    }
+  };
+}
