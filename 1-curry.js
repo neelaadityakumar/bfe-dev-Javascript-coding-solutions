@@ -1,5 +1,5 @@
 function curry(fn) {
-  return function curried(...args) {
+  function curried(...args) {
     // if number of arguments match
     if (args.length >= fn.length) {
       return fn(...args);
@@ -7,7 +7,8 @@ function curry(fn) {
     return function (...missingArgs) {
       return curried(...args, ...missingArgs);
     };
-  };
+  }
+  return curried;
 }
 
 const join = (a, b, c) => {

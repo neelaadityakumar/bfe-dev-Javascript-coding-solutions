@@ -10,14 +10,15 @@ function curriedJoin(...initialArgs) {
   let sums = sum.call(null, ...initialArgs);
 
   const curried = (...args) => {
+    if (args.length === 0) {
+      return sums;
+    }
     sums += sum.call(null, ...args);
     return curried;
   };
 
-  curried.valueOf = () => sums;
-
   return curried;
 }
 
-const result = curriedJoin(1, 2)(2, 2)(12)(3);
-console.log(+result);
+const result = curriedJoin(1, 2)(2, 2)(12)(3)(1, 2);
+console.log(result());
