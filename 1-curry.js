@@ -1,12 +1,26 @@
 function curry(fn) {
   function curried(...args) {
-    // if number of arguments match
     if (args.length >= fn.length) {
       return fn(...args);
     }
-    return function (...missingArgs) {
+    return (...missingArgs) => {
       return curried(...args, ...missingArgs);
     };
+  }
+  return curried;
+}
+
+function curry_2(fn) {
+  let totalArgs = [];
+  function curried(...args) {
+    totalArgs = totalArgs.concat(args);
+
+    if (totalArgs.length >= fn.length) {
+      const result = fn(...totalArgs);
+      totalArgs = [];
+      return result;
+    }
+    return curried;
   }
   return curried;
 }
